@@ -1,49 +1,11 @@
-<h1 align="center">Wanna Ant Design custom Uploader</h1>
+---
+category: Components
+type: Data Entry
+title: Upload
+cover: https://gw.alipayobjects.com/zos/alicdn/QaeBt_ZMg/Upload.svg
+---
 
-## Modified attributes:
-```
-- uploadListWrapperRender(uploadListNode: ReactElement, fileList: object[]) => React.ReactNode
-```
-Returns: custom wrapper of the whole component
-
-##### fileList
-List of files that have been processed
-
-##### uploadListNode
-ReactComponent that contains all items of uploadList rendered by itemRender
-
-```
-- itemRender(originNode: ReactElement, file: object, onRemove: function, fileList: object[])
-```
-Custom item of uploadList
-
-##### onRemove
-A function that can be executed to remove file from file list
-## Usage
-
-```jsx
-import { Upload } from 'wanna-ant-uploader';
-
-const App = () => (
-  <>
-    <Upload
-        uploadListWrapperRender={(uploadListNode, fileList) => (
-            <>
-                Global uploader Wrapper
-
-                {uploadListNode}
-            </>
-        )}
-        itemRender={(originNode, file, onRemove, fileList) => (
-            <>Upload list item</>
-        )
-
-       }>
-        Some child content
-    </Upload>
-  </>
-);
-```
+Upload file by selecting or dragging.
 
 ## When To Use
 
@@ -69,8 +31,7 @@ Uploading is the process of publishing information (web pages, text, pictures, v
 | headers | Set request headers, valid above IE10 | object | - |  |
 | iconRender | Custom show icon | (file: UploadFile, listType?: UploadListType) => ReactNode | - |  |
 | isImageUrl | Customize if render &lt;img /> in thumbnail | (file: UploadFile) => boolean | [(inside implementation)](https://github.com/ant-design/ant-design/blob/4ad5830eecfb87471cd8ac588c5d992862b70770/components/upload/utils.tsx#L47-L68) |  |
-| uploadListWrapperRender | Component wrapper | (uploadListNode: ReactElement, fileList: object[])
-| itemRender | Custom item of uploadList | (originNode: ReactElement, file: UploadFile, onRemove: function, fileList?: object\[]) => React.ReactNode | - | 4.7.0 |
+| itemRender | Custom item of uploadList | (originNode: ReactElement, file: UploadFile, fileList?: object\[]) => React.ReactNode | - | 4.7.0 |
 | listType | Built-in stylesheets, support for three types: `text`, `picture` or `picture-card` | string | `text` |  |
 | method | The http method of upload request | string | `post` |  |
 | multiple | Whether to support selected multiple file. `IE10+` supported. You can select multiple files with CTRL holding down while multiple is set to be true | boolean | false |  |
