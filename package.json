@@ -1,5 +1,5 @@
 {
-  "name": "wanna-ant-uploader",
+  "name": "@wannaby/wanna-ant-uploader",
   "version": "0.0.1",
   "description": "Wanna Ant Uploader",
   "title": "Wanna Ant Uploader",
@@ -260,5 +260,17 @@
   ],
   "tnpm": {
     "mode": "npm"
-  }
+  },
+  "directories": {
+    "test": "tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WANNABY/wanna-ant-uploader.git"
+  },
+  "author": "Vadim Mouseluka <vadim@wanna.by>",
+  "bugs": {
+    "url": "https://github.com/WANNABY/wanna-ant-uploader/issues"
+  },
+  "homepage": "https://github.com/WANNABY/wanna-ant-uploader#readme"
 }
