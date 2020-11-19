@@ -86,9 +86,6 @@ const webpackConfig = getWebpackConfig(false);
 const webpackDarkConfig = getWebpackConfig(false);
 const webpackCompactConfig = getWebpackConfig(false);
 
-console.log('#######', webpackConfig)
-console.log('%%%%%%', webpackDarkConfig)
-
 webpackConfig.forEach(config => {
   injectWarningCondition(config);
 });
