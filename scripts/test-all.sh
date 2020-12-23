@@ -20,7 +20,7 @@ echo "[TEST ALL] dekko dist"
 node ./tests/dekko/dist.test.js
 
 echo "[TEST ALL] dist test"
-LIB_DIR=dist npm test
+LIB_DIR=dist npm test -- --passWithNoTests
 
 echo "[TEST ALL] dekko lib"
 
@@ -34,4 +34,4 @@ echo "[TEST ALL] test"
 npm test
 
 echo "[TEST ALL] test node"
-npm run test-node
+npm run test-node -- --passWithNoTests

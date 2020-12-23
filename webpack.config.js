@@ -18,7 +18,7 @@ function ignoreMomentLocale(webpackConfig) {
 
 function addLocales(webpackConfig) {
   let packageName = 'antd-with-locales';
-  if (webpackConfig.entry['antd.min']) {
+  if (webpackConfig.entry['@wannaby/wanna-ant-uploader.min']) {
     packageName += '.min';
   }
   webpackConfig.entry[packageName] = './index-with-locales.js';
@@ -118,4 +118,4 @@ if (process.env.RUN_ENV === 'PRODUCTION') {
 }
 
 
-module.exports = [...webpackConfig, ...webpackDarkConfig]; // , ...webpackDarkConfig, ...webpackCompactConfig];
+module.exports = [...webpackConfig, ...webpackDarkConfig, ...webpackCompactConfig];
