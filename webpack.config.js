@@ -118,4 +118,4 @@ if (process.env.RUN_ENV === 'PRODUCTION') {
 }
 
 
-module.exports = [...webpackConfig, ...webpackDarkConfig]; //, ...webpackDarkConfig, ...webpackCompactConfig];
+module.exports = [...webpackConfig, ...webpackDarkConfig]; // , ...webpackDarkConfig, ...webpackCompactConfig];

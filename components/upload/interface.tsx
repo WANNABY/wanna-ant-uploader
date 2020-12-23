@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { ProgressProps } from './props/progress';
 
-export type UploadFileStatus = 'error' | 'success' | 'done' | 'uploading' | 'removed';
+export type UploadFileStatus = 'error' | 'success' | 'done' | 'uploading' | 'removed' | 'canceled';
 
 export interface HttpRequestHeader {
   [key: string]: string;
@@ -11,6 +11,13 @@ export interface RcFile extends File {
   uid: string;
   readonly lastModifiedDate: Date;
   readonly webkitRelativePath: string;
+}
+
+export interface customError {
+  name: string;
+  message: string;
+  stack?: string;
+  wasCanceled?: boolean;
 }
 
 export interface RcCustomRequestOptions {
@@ -78,6 +85,7 @@ type TransformFileHandler = (
 ) => string | Blob | File | PromiseLike<string | Blob | File>;
 
 export interface UploadProps<T = any> {
+  onSyncFiles?: (file: UploadFile) => void;
   type?: UploadType;
   name?: string;
   defaultFileList?: Array<UploadFile<T>>;

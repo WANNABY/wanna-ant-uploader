@@ -2,11 +2,11 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import { act } from 'react-dom/test-utils';
-import Upload from '..';
 import Form from 'antd/lib/form';
+import { resetWarned } from 'antd/lib/_util/devWarning';
+import Upload from '..';
 import { T, fileToObject, getFileItem, removeFileItem } from '../utils';
 import { setup, teardown } from './mock';
-import { resetWarned } from 'antd/lib/_util/devWarning';
 import mountTest from '../../../tests/shared/mountTest';
 import rtlTest from '../../../tests/shared/rtlTest';
 
