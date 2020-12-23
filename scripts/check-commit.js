@@ -58,8 +58,6 @@ async function checkAll() {
   await checkBranch(status);
 
   await checkCommit(status);
-
-  await checkRemote();
 }
 
 checkAll();
