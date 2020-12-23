@@ -12,6 +12,7 @@ import {
   UploadChangeParam,
   UploadType,
   UploadListType,
+  customError,
 } from './interface';
 import { T, fileToObject, getFileItem, removeFileItem } from './utils';
 import LocaleReceiver from 'antd/lib/locale-provider/LocaleReceiver';
@@ -45,6 +46,7 @@ const InternalUpload: React.ForwardRefRenderFunction<unknown, UploadProps> = (pr
     style,
     itemRender,
     uploadListWrapperRender,
+    onSyncFiles,
   } = props;
 
   const [dragState, setDragState] = React.useState<string>('drop');
@@ -75,6 +77,10 @@ const InternalUpload: React.ForwardRefRenderFunction<unknown, UploadProps> = (pr
         ...info,
         fileList: [...info.fileList],
       });
+    }
+
+    if(onSyncFiles) {
+      onSyncFiles(info.file)
     }
   };
 
@@ -126,6 +132,7 @@ const InternalUpload: React.ForwardRefRenderFunction<unknown, UploadProps> = (pr
       return;
     }
     targetItem.percent = e.percent;
+    targetItem.status = 'uploading';
     onChange({
       event: e,
       file: { ...targetItem },
@@ -133,15 +140,16 @@ const InternalUpload: React.ForwardRefRenderFunction<unknown, UploadProps> = (pr
     });
   };
 
-  const onError = (error: Error, response: any, file: UploadFile) => {
+  const onError = (error: customError, response: any, file: UploadFile) => {
     const targetItem = getFileItem(file, getFileList());
     // removed
     if (!targetItem) {
       return;
     }
+
     targetItem.error = error;
     targetItem.response = response;
-    targetItem.status = 'error';
+    targetItem.status = error.wasCanceled ? 'canceled' : 'error';
     onChange({
       file: { ...targetItem },
       fileList: getFileList().concat(),
