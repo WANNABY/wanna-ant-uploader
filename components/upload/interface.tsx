@@ -85,7 +85,7 @@ type TransformFileHandler = (
 ) => string | Blob | File | PromiseLike<string | Blob | File>;
 
 export interface UploadProps<T = any> {
-  onSyncFiles: any;
+  onSyncFiles?: (file: UploadFile) => void;
   type?: UploadType;
   name?: string;
   defaultFileList?: Array<UploadFile<T>>;
