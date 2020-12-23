@@ -1,9 +1,9 @@
 import React from 'react';
 import { act } from 'react-dom/test-utils';
 import { mount } from 'enzyme';
+import Form from 'antd/lib/form';
 import Upload from '..';
 import UploadList from '../UploadList';
-import Form from 'antd/lib/form';
 import { errorRequest, successRequest } from './requests';
 import { setup, teardown } from './mock';
 import { sleep } from '../../../tests/utils';
@@ -986,13 +986,13 @@ describe('Upload List', () => {
   });
 
   it('itemRender', () => {
-    const itemRender = (originNode, file, onRemove, fileList) => {
+    const itemRender = (originNode, file, onRemove, itemFileList) => {
       const { name, status, uid, url } = file;
-      const index = fileList.indexOf(file);
+      const index = itemFileList.indexOf(file);
       return (
         <span className="custom-item-render">
           {`uid:${uid} name: ${name} status: ${status} url: ${url}  ${index + 1}/${
-            fileList.length
+            itemFileList.length
           }`}
         </span>
       );

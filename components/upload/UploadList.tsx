@@ -10,13 +10,13 @@ import DeleteOutlined from '@ant-design/icons/DeleteOutlined';
 import DownloadOutlined from '@ant-design/icons/DownloadOutlined';
 
 import { cloneElement, isValidElement } from 'antd/lib/_util/reactNode';
-import { UploadListProps, UploadFile, UploadListType } from './interface';
-import { previewImage, isImageUrl } from './utils';
 import Tooltip from 'antd/lib/tooltip';
 import Progress from 'antd/lib/progress';
 import { ConfigContext } from 'antd/lib/config-provider';
 import Button, { ButtonProps } from 'antd/lib/button';
 import useForceUpdate from 'antd/lib/_util/hooks/useForceUpdate';
+import { previewImage, isImageUrl } from './utils';
+import { UploadListProps, UploadFile, UploadListType } from './interface';
 
 const InternalUploadList: React.ForwardRefRenderFunction<unknown, UploadListProps> = (
   {

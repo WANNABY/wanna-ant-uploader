@@ -16,5 +16,6 @@ if (
 }
 /* @remove-on-es-build-end */
 
+/* eslint-disable import/prefer-default-export */
 export { default as Upload } from './upload';
 
