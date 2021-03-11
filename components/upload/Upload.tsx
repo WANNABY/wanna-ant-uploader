@@ -79,8 +79,8 @@ const InternalUpload: React.ForwardRefRenderFunction<unknown, UploadProps> = (pr
       });
     }
 
-    if(onSyncFiles) {
-      onSyncFiles(info.file)
+    if (onSyncFiles) {
+      onSyncFiles(info.file);
     }
   };
 
@@ -180,6 +180,18 @@ const InternalUpload: React.ForwardRefRenderFunction<unknown, UploadProps> = (pr
   };
 
   const onFileDrop = (e: React.DragEvent<HTMLDivElement>) => {
+    const { accept, onAcceptError } = props;
+    const isDrop = e.type === 'drop';
+
+    if (isDrop && onAcceptError && accept) {
+      const droppedFiles = Array.from(e.dataTransfer.files);
+      const acceptFormatsList = accept.split(',');
+
+      droppedFiles
+        .filter(item => item.type && !acceptFormatsList.includes(item.type))
+        .map(item => onAcceptError(item));
+    }
+
     setDragState(e.type);
   };
 
@@ -254,30 +266,31 @@ const InternalUpload: React.ForwardRefRenderFunction<unknown, UploadProps> = (pr
           const { showRemoveIcon, showPreviewIcon, showDownloadIcon, removeIcon, downloadIcon } =
             typeof showUploadList === 'boolean' ? ({} as ShowUploadListInterface) : showUploadList;
           const fileList = getFileList(true);
-          const uploadList = <UploadList
-            listType={listType}
-            items={fileList}
-            previewFile={previewFile}
-            onPreview={onPreview}
-            onDownload={onDownload}
-            onRemove={handleRemove}
-            showRemoveIcon={!disabled && showRemoveIcon}
-            showPreviewIcon={showPreviewIcon}
-            showDownloadIcon={showDownloadIcon}
-            removeIcon={removeIcon}
-            downloadIcon={downloadIcon}
-            iconRender={iconRender}
-            locale={{ ...locale, ...propLocale }}
-            isImageUrl={isImageUrl}
-            progress={progress}
-            appendAction={button}
-            itemRender={itemRender}
-          />
+          const uploadList = (
+            <UploadList
+              listType={listType}
+              items={fileList}
+              previewFile={previewFile}
+              onPreview={onPreview}
+              onDownload={onDownload}
+              onRemove={handleRemove}
+              showRemoveIcon={!disabled && showRemoveIcon}
+              showPreviewIcon={showPreviewIcon}
+              showDownloadIcon={showDownloadIcon}
+              removeIcon={removeIcon}
+              downloadIcon={downloadIcon}
+              iconRender={iconRender}
+              locale={{ ...locale, ...propLocale }}
+              isImageUrl={isImageUrl}
+              progress={progress}
+              appendAction={button}
+              itemRender={itemRender}
+            />
+          );
 
           return (
             <div>
-
-              {uploadListWrapperRender ? (uploadListWrapperRender(uploadList, fileList)) : uploadList}
+              {uploadListWrapperRender ? uploadListWrapperRender(uploadList, fileList) : uploadList}
             </div>
           );
         }}
@@ -308,10 +321,7 @@ const InternalUpload: React.ForwardRefRenderFunction<unknown, UploadProps> = (pr
           style={style}
         >
           <RcUpload {...rcUploadProps} ref={upload} className={`${prefixCls}-btn`}>
-
-            <div className={`${prefixCls}-drag-container`}>
-              {children}
-            </div>
+            <div className={`${prefixCls}-drag-container`}>{children}</div>
           </RcUpload>
         </div>
         {renderUploadList()}

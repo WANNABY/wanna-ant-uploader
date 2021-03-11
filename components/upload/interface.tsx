@@ -129,6 +129,7 @@ export interface UploadProps<T = any> {
     onRemove?: (file: UploadFile<T>) => void | boolean | Promise<void | boolean>,
     fileList?: Array<UploadFile<T>>,
   ) => React.ReactNode;
+  onAcceptError?: (file: object) => void;
 }
 
 export interface UploadState<T = any> {
